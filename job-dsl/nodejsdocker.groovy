@@ -23,3 +23,4 @@ job('NodeJS Docker example') {
             }
         }
 }
+}
