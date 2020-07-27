@@ -13,14 +13,13 @@ job('NodeJS Docker example') {
                          // Manage Jenkins -> Configure Tools -> NodeJS Installations -> Name
     }
     steps {
-        dockerBuildAndPublish {
-            repositoryName('drorzp/node-example')
-            tag('${GIT_REVISION,length=9}')
-            registryCredentials('docker')
-            forcePull(false)
-            forceTag(false)
-            createFingerprints(false)
-            skipDecorate()
+        conditionalSteps {
+            condition {
+                stringsMatch('${SOME_PARAMETER}', 'pants', false)
+            }
+            runner('Fail')
+            steps {
+                shell("echo 'just one step'")
+            }
         }
-    }
 }
