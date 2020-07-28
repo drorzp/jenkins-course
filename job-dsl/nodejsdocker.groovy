@@ -14,12 +14,25 @@ job('NodeJS Docker example') {
     }
     steps {
         conditionalSteps {
+            def SOME_PARAMETER = 'pants'
             condition {
                 stringsMatch('${SOME_PARAMETER}', 'pants', false)
             }
-            runner('Fail')
+            runner('DontRun')
             steps {
                 shell("echo 'just one step'")
+                shell("echo 'just second  step'")
+            }
+        }
+         conditionalSteps {
+            def SOME_PARAMETER = 'pants2'
+            condition {
+                stringsMatch('${SOME_PARAMETER}', 'pants2', false)
+            }
+            runner('DontRun')
+            steps {
+                shell("echo 'just one step2'")
+                shell("echo 'just second  step2'")
             }
         }
 }
