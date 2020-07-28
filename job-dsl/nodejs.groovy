@@ -12,8 +12,28 @@ job('NodeJS example') {
         nodejs('node') // this is the name of the NodeJS installation in 
                          // Manage Jenkins -> Configure Tools -> NodeJS Installations -> Name
     }
-    steps {
-        shell("echo 'hi there'")
-        shell("npm install")
-    }
+     steps {
+        conditionalSteps {
+            def SOME_PARAMETER = 'pants'
+            condition {
+                stringsMatch('${SOME_PARAMETER}', 'pants', false)
+            }
+            runner('DontRun')
+            steps {
+                shell("echo 'just one step'")
+                shell("echo 'just second  step'")
+            }
+        }
+         conditionalSteps {
+            def SOME_PARAMETER = 'pants2xx'
+            condition {
+                stringsMatch('${SOME_PARAMETER}', 'pants2xx', false)
+            }
+            runner('DontRun')
+            steps {
+                shell("echo 'just one step2'")
+                shell("echo 'just second  step2'")
+            }
+        }
+}
 }
