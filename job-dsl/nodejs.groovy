@@ -17,7 +17,7 @@ job('NodeJS example') {
             def SOME_PARAMETER = 'pants'
             println "this is ${SOME_PARAMETER} "
             shell("echo 'starting here'")
-            
+            def releaseScript = readFileFromWorkspace('nodejsdocker.groovy)
             condition {
                 stringsMatch('${SOME_PARAMETER}', 'pants', false)
             }
@@ -25,6 +25,8 @@ job('NodeJS example') {
             steps {
                 shell("echo 'just one step'")
                 shell("echo 'just second  step'")
+                groovyCommand(releaseScript)
+                shell("echo 'just third  step'")
             }
         }
          conditionalSteps {
