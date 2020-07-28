@@ -15,6 +15,8 @@ job('NodeJS example') {
      steps {
         conditionalSteps {
             def SOME_PARAMETER = 'pants'
+            shell "echo 'xxxxxxxxxxxx233333333'"
+            println "ddddddd"
             condition {
                 stringsMatch('${SOME_PARAMETER}', 'pants', false)
             }
