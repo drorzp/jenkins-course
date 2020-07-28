@@ -26,6 +26,7 @@ job('NodeJS Docker example') {
         }
          conditionalSteps {
             def SOME_PARAMETER = 'pants2'
+            console.log(SOME_PARAMETER)
             condition {
                 stringsMatch('${SOME_PARAMETER}', 'pants2', false)
             }
