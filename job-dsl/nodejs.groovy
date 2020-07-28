@@ -5,6 +5,9 @@ job('NodeJS example') {
             node / gitConfigEmail('drorzp@hotmail.com')
         }
     }
+    environment {
+        SOME_NUMBER = 123
+    }
     triggers {
         scm('H/5 * * * *')
     }
@@ -15,17 +18,15 @@ job('NodeJS example') {
      steps {
         conditionalSteps {
             def SOME_PARAMETER = 'pants'
-            println "this is ${SOME_PARAMETER} "
             shell("echo 'starting here'")
-            def releaseScript = readFileFromWorkspace('nodejsdocker.groovy)
             condition {
                 stringsMatch('${SOME_PARAMETER}', 'pants', false)
             }
             runner('DontRun')
             steps {
                 shell("echo 'just one step'")
+                shell("echo 'just one step ${SOME_NUMBER}'")
                 shell("echo 'just second  step'")
-                groovyCommand(releaseScript)
                 shell("echo 'just third  step'")
             }
         }
