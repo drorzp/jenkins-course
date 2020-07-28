@@ -25,10 +25,10 @@ job('NodeJS Docker example') {
             }
         }
          conditionalSteps {
-            def SOME_PARAMETER = 'pants2'
+            def SOME_PARAMETER = 'pants2xx'
             println SOME_PARAMETER
             condition {
-                stringsMatch('${SOME_PARAMETER}', 'pants2', false)
+                stringsMatch('${SOME_PARAMETER}', 'pants2xx', false)
             }
             runner('DontRun')
             steps {
